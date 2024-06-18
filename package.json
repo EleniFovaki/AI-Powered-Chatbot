@@ -1,7 +1,7 @@
 {
-  "name": "ai-powered-chatbot",
+  "name": "nodejs-chatgpt-tutorial",
   "version": "1.0.0",
-  "description": "ai-powered chatbot with OpenAI, ChatGPT, node.js and react",
+  "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -11,6 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "openai": "^4.51.0"
+    "axios": "^1.7.2",
+    "axios-retry": "^4.4.0",
+    "openai": "^4.0.0",
+    "readline": "^1.3.0"
   }
 }
