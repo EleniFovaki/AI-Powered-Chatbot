@@ -1,27 +1,26 @@
 import OpenAI from 'openai';
+import readline from 'readline';
 
 const openai = new OpenAI({
   
 });
-const chatCompletion = await openai.chat.completions.create({
-  model: "gpt-3.5-turbo",
-  messages: [{"role": "user", "content": "Hello!"}],
+
+const userInterface = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
 });
-console.log(chatCompletion.choices[0].message);
-const stream = await openai.chat.completions.create({
-  model: "gpt-3.5-turbo",
-  messages: [{"role": "user", "content": "Hello!"}],
-  stream: true,
+
+userInterface.prompt();
+
+userInterface.on("line", async (input) => {
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [{ role: "user", content: input }],
+    });
+    console.log(response.choices[0].message.content);
+  } catch (error) {
+    console.error(error);
+  }
+  userInterface.prompt();
 });
-for await (const part of stream) {
-  console.log(part.choices[0].delta);
-}
-const completion = await openai.completions.create({
-  model: "text-davinci-003",
-  prompt: "This story begins",
-  max_tokens: 30,
-});
-console.log(completion.choices[0].text);
-const { data, response } = openai.chat.completions.create(params).withResponse()
-response.headers.get('x-ratelimit-remaining-tokens')
-data.id
